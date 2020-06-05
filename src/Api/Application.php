@@ -41,6 +41,7 @@ class Application extends Container
         Spec\ServiceProvider::class,
         Product\ServiceProvider::class,
         Sku\ServiceProvider::class,
+        Shop\ServiceProvider::class,
     ];
 
     /**

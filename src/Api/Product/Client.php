@@ -27,7 +27,7 @@ class Client extends BaseClient
      * @param string $cid 父分类id,根据父id可以获取子分类，一级分类cid=0
      * @return void
      */
-    public function getGoodsCategory(string $cid)
+    public function getGoodsCategory(string $cid = '0')
     {
         return $this->httpPost('product.getGoodsCategory', ['cid' => $cid]);
     }
@@ -48,7 +48,8 @@ class Client extends BaseClient
      * @param string $mobile 客服号码
      * @param string $weight 商品重量 (单位:克) 范围: 10克 - 9999990克
      * @param string $product_format  属性名称|属性值之间用|分隔, 多组之间用^分开 => 货号|8888^上市年份季节|2018年秋季
-     * @param array $options
+     * @param string $cos_ratio 佣金比率 0
+     * @param string $pay_type 付款方式 (0货到付款 1在线支付 2两者都支持)
      *                  - discount_price 售卖价，单位分
      *                  - spec_pic 主规格id, 如颜色-尺寸, 颜色就是主规格, 颜色如黑,白,黄,它们的id|图片url=>1234|img_url^1235|img_url
      *                  - usp 商品卖点
@@ -63,23 +64,9 @@ class Client extends BaseClient
      *                  - class_quality 商品创建和编辑操作支持设置品类资质链接,多个图片以逗号分隔
      * @return void
      */
-    public function add(string $name, string $pic, string $description, string $out_product_id, string $market_price, 
-        string $first_cid, string $second_cid, string $third_cid, string $spec_id, string $mobile, string $weight, string $product_format, array $options = [])
+    public function add(array $options = [])
     {
-        return $this->httpPost('product.add', array_merge($options, [
-            'name' => $name, 
-            'pic' => $pic, 
-            'description' => $description, 
-            'out_product_id' => $out_product_id, 
-            'market_price' => $market_price, 
-            'first_cid' => $first_cid, 
-            'second_cid' => $second_cid, 
-            'third_cid' => $third_cid, 
-            'spec_id' => $spec_id, 
-            'mobile' => $mobile, 
-            'weight' => $weight, 
-            'product_format' => $product_format
-        ]));
+        return $this->httpPost('product.add', $options);
     }
 
 

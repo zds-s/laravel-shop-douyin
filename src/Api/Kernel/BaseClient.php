@@ -49,9 +49,12 @@ class BaseClient
      *
      * @return array|\GuzzleHttp\Psr7\Response
      */
-    public function httpGet(string $uri, array $query = [])
+    public function httpGet(string $method, array $query = [])
     {
-        return $this->requestShopDouyin('GET', $uri, [RequestOptions::QUERY => $query]);
+        $_methods = explode('.', $method);
+        return $this->request('GET', implode('/', $_methods), [
+            RequestOptions::QUERY => $this->_mergeBaseParams($method, $query)
+        ]);
     }
 
     public function httpDelete(string $uri, array $query = [])
@@ -128,7 +131,8 @@ class BaseClient
         ];
 
         ksort($params);
-        $param_json = json_encode($params);
+        $param_json = json_encode((object)$params, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+        
         $str = "app_key" . $public['app_key'] . "method" . $method . "param_json" . $param_json . "timestamp" . $public['timestamp'] . "v" . $public['v'];
         $md5_str = $secret . $str . $secret;
         $sign = md5($md5_str);

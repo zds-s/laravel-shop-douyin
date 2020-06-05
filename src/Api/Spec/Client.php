@@ -41,7 +41,7 @@ class Client extends BaseClient
      * @param array $options
      * @return void
      */
-    public function create(string $name, string $specs, array $options = [])
+    public function add(string $name, string $specs, array $options = [])
     {
         return $this->httpPost('spec.add', array_merge([
             'name' => $name,
