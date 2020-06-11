@@ -14,7 +14,6 @@ class ShopDouyinServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadRoutesFrom(__DIR__.'/../routes/route.php');
         // 发布配置
         $this->mergeConfigFrom(
             __DIR__.'/../config/config.php', 'shopDouyin'
