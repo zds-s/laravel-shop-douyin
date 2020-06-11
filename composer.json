@@ -1,12 +1,12 @@
 {
-    "name": "xbhub/laravel-shopDouyin",
+    "name": "xbhub/laravel-shop-douyin",
     "type": "library",
     "description": "抖音小店erp接口",
     "keywords": [
         "Xbhub",
         "ShopDouyin"
     ],
-    "homepage": "https://gitee.com/xbhub/shopDouyin",
+    "homepage": "https://gitee.com/xbhub/shop-douyin",
     "license": "MIT",
     "authors": [
         {
