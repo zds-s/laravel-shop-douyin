@@ -33,20 +33,9 @@ class Client extends BaseClient
     * @param string $settlement_price 结算价格 (单位 分)
     * @return void
     */
-    public function add(string $product_id, string $out_sku_id, string $spec_id, 
-        string $spec_detail_ids, string $stock_num, string $price, string $settlement_price
-    )
+    public function add(array $opstions)
     {
-        return $this->httpPost('sku.add', [
-            'product_id' => $product_id,
-            'out_sku_id' => $out_sku_id,
-            'spec_id' => $spec_id,
-            'spec_detail_ids' => $spec_detail_ids,
-            'stock_num' => $stock_num,
-            'price' => $price,
-            'settlement_price' => $settlement_price,
-            'code' => $out_sku_id
-        ]);
+        return $this->httpPost('sku.add', $opstions);
     }
 
     /**
@@ -61,20 +50,9 @@ class Client extends BaseClient
      * @param string $settlement_price
      * @return void
      */
-    public function addAll(string $product_id, string $out_sku_id, string $spec_id, 
-        string $spec_detail_ids, string $stock_num, string $price, string $settlement_price
-    )
+    public function addAll(array $options)
     {
-        return $this->httpPost('sku.addAll', [
-            'product_id' => $product_id,
-            'out_sku_id' => $out_sku_id,
-            'spec_id' => $spec_id,
-            'spec_detail_ids' => $spec_detail_ids,
-            'stock_num' => $stock_num,
-            'price' => $price,
-            'settlement_price' => $settlement_price,
-            'code' => $out_sku_id
-        ]);
+        return $this->httpPost('sku.addAll', $options);
     }
 
     /**
