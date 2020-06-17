@@ -122,9 +122,9 @@ class BaseClient
      */
     protected function _mergeBaseParams(string $method, array $params)
     {
-        $secret = config('ShopDouyin.app_secret');
+        $credt = $this->credentials();
         $public = [
-            'app_key' => config('ShopDouyin.app_id'),
+            'app_key' => $credt['appkey'],
             'timestamp'  => date('Y-m-d H:i:s', time()),
             'v'          => '1',
             'method' => $method
@@ -132,13 +132,24 @@ class BaseClient
 
         ksort($params);
         $param_json = json_encode((object)$params, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
-        
+
         $str = "app_key" . $public['app_key'] . "method" . $method . "param_json" . $param_json . "timestamp" . $public['timestamp'] . "v" . $public['v'];
-        $md5_str = $secret . $str . $secret;
+        $md5_str = $credt['appsecret'] . $str . $credt['appsecret'];
         $sign = md5($md5_str);
         return array_merge($public, [
             'param_json' => $param_json,
             'sign' => $sign
         ]);
+    }
+
+    /**
+     * @return array
+     */
+    protected function credentials(): array
+    {
+        return [
+            'appkey'     => $this->app['config']->get('app_id'),
+            'appsecret' => $this->app['config']->get('app_secret'),
+        ];
     }
 }

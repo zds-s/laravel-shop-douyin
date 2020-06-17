@@ -20,7 +20,8 @@
         "php" : "~7.0",
         "pimple/pimple": "^3.2",
         "laravel/framework": "^7.3",
-        "symfony/cache": "^5.1"
+        "symfony/cache": "^5.1",
+        "adbario/php-dot-notation": "^2.2"
     },
     "require-dev": {
         "phpunit/phpunit" : ">=5.4.3",
