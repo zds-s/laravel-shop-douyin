@@ -9,11 +9,11 @@ class ShopDouyin extends Facade
 
     public static function getFacadeAccessor()
     {
-        return 'shopDouyin';
+        return 'ShopDouyin';
     }
 
     public static function __callStatic($name, $args)
     {
-        return app('shopDouyin')->$name;
+        return app('ShopDouyin')->$name;
     }
 }

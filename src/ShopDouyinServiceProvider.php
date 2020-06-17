@@ -16,7 +16,7 @@ class ShopDouyinServiceProvider extends ServiceProvider
     {
         // 发布配置
         $this->mergeConfigFrom(
-            __DIR__.'/../config/config.php', 'shopDouyin'
+            __DIR__.'/../config/config.php', 'ShopDouyin'
         );
     }
 
@@ -27,14 +27,14 @@ class ShopDouyinServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('shopDouyin', function ($app) {
-            $config = config('shopDouyin');
+        $this->app->singleton('ShopDouyin', function ($app) {
+            $config = config('ShopDouyin');
             return new Application($config);
         });
     }
 
     public function provides()
     {
-        return ['shopDouyin'];
+        return ['ShopDouyin'];
     }
 }

@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 /*
- * This file is part of the xbhub/shopDouyin.
+ * This file is part of the xbhub/ShopDouyin.
  *
  * (c) jory <jorycn@163.com>
  *

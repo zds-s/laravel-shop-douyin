@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the xbhub/shopDouyin.
+ * This file is part of the xbhub/ShopDouyin.
  *
  * (c) jory <jorycn@163.com>
  *
@@ -31,7 +31,7 @@ class BaseClient
      */
     protected $app;
 
-    protected $shopDouyinHandlerStack;
+    protected $ShopDouyinHandlerStack;
 
     /**
      * @param \namespace Xbhub\ShopDouyin\Api\Application
@@ -122,9 +122,9 @@ class BaseClient
      */
     protected function _mergeBaseParams(string $method, array $params)
     {
-        $secret = config('shopDouyin.app_secret');
+        $secret = config('ShopDouyin.app_secret');
         $public = [
-            'app_key' => config('shopDouyin.app_id'),
+            'app_key' => config('ShopDouyin.app_id'),
             'timestamp'  => date('Y-m-d H:i:s', time()),
             'v'          => '1',
             'method' => $method
