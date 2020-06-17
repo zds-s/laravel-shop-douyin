@@ -18,6 +18,9 @@ class ShopDouyinServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/../config/config.php', 'ShopDouyin'
         );
+        $this->publishes([
+            __DIR__.'/../config/config.php' => config_path('ShopDouyin.php'),
+        ]);
     }
 
     /**
