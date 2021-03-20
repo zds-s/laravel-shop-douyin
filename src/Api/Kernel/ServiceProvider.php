@@ -37,6 +37,7 @@ class ServiceProvider implements ServiceProviderInterface
                     'Content-Type' => 'text/html;charset=utf8',
                 ],
                 'timeout'  => 5.0,
+                'verify'=>false
             ]);
         };
 

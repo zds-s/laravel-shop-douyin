@@ -1,25 +1,26 @@
 {
-    "name": "xbhub/laravel-shop-douyin",
+    "name": "death_satan/laravel-shop-douyin",
     "type": "library",
-    "description": "抖音小店erp接口",
+    "description": "抖音小店api接口",
     "keywords": [
-        "Xbhub",
-        "ShopDouyin"
+        "Death-Satan",
+        "ShopDouyin",
+        "doudian",
+        "抖店"
     ],
     "homepage": "https://gitee.com/xbhub/shop-douyin",
     "license": "MIT",
     "authors": [
         {
-            "name": "jory",
-            "email": "jorycn@163.com",
-            "homepage": "http://www.xbhub.com",
+            "name": "death-satan",
+            "email": "2771717608@qq.com",
             "role": "Developer"
         }
     ],
     "require": {
         "php" : "~7.0",
         "pimple/pimple": "^3.2",
-        "laravel/framework": "^7.3",
+        "laravel/framework": "^8.x",
         "symfony/cache": "^5.1",
         "adbario/php-dot-notation": "^2.2"
     },
@@ -45,6 +46,10 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
+        },
+        "laravel": {
+            "providers": ["\\Xbhub\\ShopDouyin\\ShopDouyinServiceProvider"]
+
         }
     },
     "config": {
