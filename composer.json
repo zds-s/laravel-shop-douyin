@@ -20,7 +20,7 @@
     "require": {
         "php" : "~7.0",
         "pimple/pimple": "^3.2",
-        "laravel/framework": "^8.x",
+        "laravel/framework": "8.x",
         "symfony/cache": "^5.1",
         "adbario/php-dot-notation": "^2.2"
     },
