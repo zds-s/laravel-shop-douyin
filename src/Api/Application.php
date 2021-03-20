@@ -18,18 +18,23 @@ use Pimple\Container;
  *
  * @author jory <jorycn@163.com>
  *
- * @property \namespace Xbhub\ShopDouyin\Api\Auth\Client $auth
- * @property \namespace Xbhub\ShopDouyin\Api\Chat\Client $chat
- * @property \namespace Xbhub\ShopDouyin\Api\Role\Client $role
- * @property \namespace Xbhub\ShopDouyin\Api\User\Client $user
- * @property \namespace Xbhub\ShopDouyin\Api\Media\Client $media
- * @property \namespace Xbhub\ShopDouyin\Api\Jssdk\Client $jssdk
- * @property \namespace Xbhub\ShopDouyin\Api\Checkin\Client $checkin
- * @property \namespace Xbhub\ShopDouyin\Api\Message\Client $message
- * @property \namespace Xbhub\ShopDouyin\Api\Attendance\Client $attendance
- * @property \namespace Xbhub\ShopDouyin\Api\Kernel\Credential $credential
- * @property \namespace Xbhub\ShopDouyin\Api\Department\Client $department
- * @property \namespace Xbhub\ShopDouyin\Api\Message\AsyncClient $async_message
+// * @property Xbhub\ShopDouyin\Api\Auth\Client  $auth
+// * @property Xbhub\ShopDouyin\Api\Chat\Client $chat
+// * @property Xbhub\ShopDouyin\Api\Role\Client $role
+// * @property Xbhub\ShopDouyin\Api\User\Client $user
+// * @property Xbhub\ShopDouyin\Api\Media\Client $media
+ * @property \Xbhub\ShopDouyin\Api\Sku\Client $sku
+ * @property \Xbhub\ShopDouyin\Api\Spec\Client $spec
+ * @property \Xbhub\ShopDouyin\Api\Shop\Client $shop
+ * @property \Xbhub\ShopDouyin\Api\Order\Client $order
+ * @property \Xbhub\ShopDouyin\Api\Product\Client $product
+// * @property Xbhub\ShopDouyin\Api\Jssdk\Client $jssdk
+// * @property Xbhub\ShopDouyin\Api\Checkin\Client $checkin
+// * @property Xbhub\ShopDouyin\Api\Message\Client $message
+// * @property Xbhub\ShopDouyin\Api\Attendance\Client $attendance
+ * @property \Xbhub\ShopDouyin\Api\Kernel\Credential $credential
+// * @property Xbhub\ShopDouyin\Api\Department\Client $department
+// * @property Xbhub\ShopDouyin\Api\Message\AsyncClient $async_message
  */
 class Application extends Container
 {
