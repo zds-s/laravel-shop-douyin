@@ -20,7 +20,7 @@ class ShopDouyinServiceProvider extends ServiceProvider
         );
         $this->publishes([
             __DIR__.'/../config/config.php' => config_path('ShopDouyin.php'),
-        ]);
+        ],'douyin');
     }
 
     /**

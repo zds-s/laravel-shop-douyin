@@ -11,6 +11,10 @@
 
 namespace Xbhub\ShopDouyin\Api\Kernel;
 
+use Carbon\Traits\Date;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use Xbhub\ShopDouyin\Api\Application;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\RequestOptions;
@@ -27,14 +31,14 @@ class BaseClient
     use MakesHttpRequests;
 
     /**
-     * @var \namespace Xbhub\ShopDouyin\Api\Application
+     * @var  Xbhub\ShopDouyin\Api\Application
      */
     protected $app;
 
     protected $ShopDouyinHandlerStack;
 
     /**
-     * @param \namespace Xbhub\ShopDouyin\Api\Application
+     * @param  Xbhub\ShopDouyin\Api\Application
      */
     public function __construct(Application $app)
     {
@@ -62,6 +66,12 @@ class BaseClient
         return $this->requestShopDouyin("DELETE", $uri, [RequestOptions::QUERY => $query]);
     }
 
+    /**
+     * @param string $method
+     * @param array $query
+     * @return array
+     * @throws Exceptions\ClientError
+     */
     public function httpPost(string $method, array $query = [])
     {
         $_methods = explode('.', $method);
@@ -125,21 +135,30 @@ class BaseClient
         $credt = $this->credentials();
         $public = [
             'app_key' => $credt['appkey'],
-            'timestamp'  => date('Y-m-d H:i:s', time()),
-            'v'          => '1',
+            'timestamp'  => Carbon::now()->format('Y-m-d H:i:s'),
+            'v'          => '2',
             'method' => $method
         ];
-
+        $common = array_merge($public,$params);
+        $access_token = $params['access_token'];
+        unset($common['access_token'],$common['sign_method'],$params['access_token']);
         ksort($params);
-        $param_json = json_encode((object)$params, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
-
-        $str = "app_key" . $public['app_key'] . "method" . $method . "param_json" . $param_json . "timestamp" . $public['timestamp'] . "v" . $public['v'];
+//        dump($params);
+        $param_json = json_encode((object)$params,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+        $common['param_json'] = $param_json;
+        $str = 'app_key'.$credt['appkey'].'method'.$method.'param_json'.$param_json
+                .'timestamp'.$public['timestamp'].'v2';
         $md5_str = $credt['appsecret'] . $str . $credt['appsecret'];
         $sign = md5($md5_str);
-        return array_merge($public, [
+        $public['sign_method'] = 'md5';
+        $public['access_token']=$access_token;
+        $ret = array_merge($public, [
             'param_json' => $param_json,
             'sign' => $sign
         ]);
+        ksort($ret);
+//        dump($ret);
+        return $ret;
     }
 
     /**

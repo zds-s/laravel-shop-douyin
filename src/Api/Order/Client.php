@@ -11,6 +11,7 @@
 
 namespace Xbhub\ShopDouyin\Api\Order;
 
+use GuzzleHttp\Psr7\Response;
 use Xbhub\ShopDouyin\Api\Kernel\BaseClient;
 
 /**
@@ -26,7 +27,7 @@ class Client extends BaseClient
      * @param string $start_at
      * @param string $end_at
      * @param array $options
-     * @return void
+     * @return array|Response
      */
     public function list(string $start_at, string $end_at, array $options = [])
     {
@@ -37,18 +38,44 @@ class Client extends BaseClient
             'page' => '0',
             'size' => '100'
         ], $options);
-        return $this->httpPost('order.list', $_data);
+        return $this->httpPost('order.list', $_data)['data'];
+    }
+
+    /**
+     * 添加订单备注
+     * @param string $order_id
+     * @param string $remark
+     * @return array
+     */
+    public function addOrderRemark(string $order_id,string $remark,$options=[])
+    {
+        $_data = array_merge(compact('order_id','remark'),$options);
+        return $this->httpPost('order.addOrderRemark',$_data);
     }
 
     /**
      * 获取订单详情
      *
      * @param string $order_id
-     * @return void
+     * @return void|array
      */
     public function detail(string $order_id)
     {
         return $this->httpPost('order.detail', ['order_id' => $order_id]);
+    }
+
+    /**
+     * 订单发货
+     * @param $order_id string 订单id
+     * @param $logistics_id string 物流id
+     * @param $logistics_code string 运单号
+     * @param $company string 物流公司名称
+     * @return array
+     * @throws \Xbhub\ShopDouyin\Api\Kernel\Exceptions\ClientError
+     */
+    public function logisticsAdd($order_id,$logistics_id,$logistics_code,$company)
+    {
+        return $this->httpPost('order.logisticsAdd',compact('order_id','logistics_id','company','logistics_code'));
     }
 
 }

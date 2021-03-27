@@ -18,7 +18,7 @@ use Pimple\Container;
  *
  * @author jory <jorycn@163.com>
  *
-// * @property Xbhub\ShopDouyin\Api\Auth\Client  $auth
+ * @property \Xbhub\ShopDouyin\Api\Auth\Client  $auth
 // * @property Xbhub\ShopDouyin\Api\Chat\Client $chat
 // * @property Xbhub\ShopDouyin\Api\Role\Client $role
 // * @property Xbhub\ShopDouyin\Api\User\Client $user
@@ -48,6 +48,7 @@ class Application extends Container
         Sku\ServiceProvider::class,
         Shop\ServiceProvider::class,
         Order\ServiceProvider::class,
+        Auth\ServiceProvider::class,
     ];
 
     /**

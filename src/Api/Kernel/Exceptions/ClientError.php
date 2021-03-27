@@ -11,6 +11,8 @@
 
 namespace Xbhub\ShopDouyin\Api\Kernel\Exceptions;
 
+use Throwable;
+
 /**
  * Class ClientError.
  *
@@ -18,4 +20,13 @@ namespace Xbhub\ShopDouyin\Api\Kernel\Exceptions;
  */
 class ClientError extends Exception
 {
+    public function __construct($message = "", $code = 0, Throwable $previous = null)
+    {
+        if (is_array($message))
+        {
+            $message= $message['message'];
+        }
+        parent::__construct($message, $code, $previous);
+    }
+    
 }
