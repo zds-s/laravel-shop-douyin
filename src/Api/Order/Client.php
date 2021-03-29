@@ -73,7 +73,7 @@ class Client extends BaseClient
      * @return array
      * @throws \Xbhub\ShopDouyin\Api\Kernel\Exceptions\ClientError
      */
-    public function logisticsAdd($order_id,$logistics_id,$logistics_code,$company)
+    public function logisticsAdd($order_id,$logistics_id,$logistics_code,$company,$access_token)
     {
         return $this->httpPost('order.logisticsAdd',compact('order_id','logistics_id','company','logistics_code'));
     }

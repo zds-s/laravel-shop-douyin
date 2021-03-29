@@ -35,6 +35,12 @@ class BaseClient
      */
     protected $app;
 
+    /**
+     *
+     * @var array $commonParams 公共参数
+     */
+    protected static array $commonParams = [];
+
     protected $ShopDouyinHandlerStack;
 
     /**
@@ -78,6 +84,15 @@ class BaseClient
         return $this->request('POST', implode('/', $_methods), [
             RequestOptions::FORM_PARAMS => $this->_mergeBaseParams($method, $query)
         ]);
+    }
+
+    /**
+     * 设置公共参数
+     * @param array $commonParams
+     */
+    public static function setCommonParams(array $commonParams)
+    {
+        self::$commonParams = $commonParams;
     }
 
     /**
@@ -139,7 +154,7 @@ class BaseClient
             'v'          => '2',
             'method' => $method
         ];
-        $common = array_merge($public,$params);
+        $common = array_merge($public,$params,self::$commonParams);
         $access_token = $params['access_token'];
         unset($common['access_token'],$common['sign_method'],$params['access_token']);
         ksort($params);
