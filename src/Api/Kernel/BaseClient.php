@@ -12,6 +12,7 @@
 namespace Xbhub\ShopDouyin\Api\Kernel;
 
 use Carbon\Traits\Date;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
@@ -77,6 +78,7 @@ class BaseClient
      * @param array $query
      * @return array
      * @throws Exceptions\ClientError
+     * @return array|Response
      */
     public function httpPost(string $method, array $query = [])
     {

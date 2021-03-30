@@ -34,10 +34,9 @@ class Client extends BaseClient
 
     /**
      * 创建商品
-     * http://openapidoc.jinritemai.com/documents/product/product_add.html
-     *
+     * @links http://openapidoc.jinritemai.com/documents/product/product_add.html
      * @param string $name xxx补水液
-     * @param string $pic 商品轮播图，每张图片用 | 分开，第一张图为主图数量限制 : 最少1张、最多5张=>img_url1|img_url2|img_url3 
+     * @param string $pic 商品轮播图，每张图片用 | 分开，第一张图为主图数量限制 : 最少1张、最多5张=>img_url1|img_url2|img_url3
      * @param string $description 商品描述，目前只支持图片多张图片用 | 分开不能用其他网站的文本粘贴，这样会出现css样式不兼容
      * @param string $out_product_id 外部商品id,接入方的商品id (需为数字字符串, max = int64)
      * @param string $market_price 市场价，单位分

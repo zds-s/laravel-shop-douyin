@@ -68,6 +68,9 @@ trait MakesHttpRequests
     protected function transformResponse($response)
     {
         $result = json_decode($response->getBody()->getContents(), true);
+        if (json_last_error()){
+            ApiReturn(40002,'json_decode errors'.json_last_error_msg());
+        }
         if ($result['err_no'] && !in_array($result['err_no'], [0, 200000])) {
             // throw new Exceptions\ClientError($result['errmsg'], $result['errcode']);
             ApiReturn(40002,$result['message']);
