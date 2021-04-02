@@ -38,13 +38,8 @@ trait MakesHttpRequests
     {
         try {
             $response = $this->app['http_client']->request($method, $uri, $options);
-
             return $this->transform ? $this->transformResponse($response) : $response;
         } catch (RequestException $e) {
-            Log::error(\GuzzleHttp\Psr7\str($e->getRequest()));
-            if ($e->hasResponse()) {
-                Log::error(\GuzzleHttp\Psr7\str($e->getResponse()));
-            }
             throw new Exceptions\ClientError('request error');
         }
     }
