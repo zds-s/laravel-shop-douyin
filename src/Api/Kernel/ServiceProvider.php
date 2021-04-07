@@ -36,7 +36,7 @@ class ServiceProvider implements ServiceProviderInterface
                 'headers'  => [
                     'Content-Type' => 'text/html;charset=utf8',
                 ],
-                'timeout'  => 10.0,
+                'timeout'  => 30.0,
                 'verify'=>false
             ]);
         };

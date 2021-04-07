@@ -68,6 +68,17 @@ class Client extends BaseClient
         return $this->httpPost('product.add', $options);
     }
 
+    /**
+     * 添加商品
+     * @param array $params
+     * @return array
+     * @throws \Xbhub\ShopDouyin\Api\Kernel\Exceptions\ClientError
+     */
+    public function addV2(array $params = [])
+    {
+        return $this->httpPost('product.addV2',$params);
+    }
+
 
     /**
      * 修改商品
@@ -94,15 +105,13 @@ class Client extends BaseClient
         return $this->httpPost('product.del', $id);
     }
 
-    /**
+    /**.
      * 获取商品列表
-     *
-     * @param string $page
-     * @param string $size
-     * @param array $options
-     *      - status 指定状态返回商品列表 0上架 1下架
-     *      - check_status 指定审核状态返回商品列表 1未提审 2审核中 3审核通过 4审核驳回 5封禁
-     * @return void
+     * @param string $page 页数
+     * @param string $size 每页多少数据
+     * @param array $options 额外的参数
+     * @return array
+     * @throws \Xbhub\ShopDouyin\Api\Kernel\Exceptions\ClientError
      */
     public function list(string $page = '0', string $size = '15', array $options = [])
     {
@@ -113,15 +122,40 @@ class Client extends BaseClient
     }
 
     /**
-     * 获取商品详情
-     *
-     * @param array $id product_id|out_product_id
-     * @return void
+     * @param string $product_id product_id
+     * @param array $options
+     * @return array
+     * @throws \Xbhub\ShopDouyin\Api\Kernel\Exceptions\ClientError
      */
-    public function detail(array $id)
+    public function detail(string $product_id,array $options=[])
     {
-        return $this->httpPost('product.detail', $id);
+        $_data = array_merge(compact('product_id'),$options);
+        return $this->httpPost('product.detail', $_data);
     }
 
-
+    /**
+     * 商品上下架
+     * @param string $product_id
+     * @param array $options
+     * @return array
+     * @throws \Xbhub\ShopDouyin\Api\Kernel\Exceptions\ClientError
+     */
+    public function setLine(string $product_id,int $type,array $options=[])
+    {
+        switch ($type)
+        {
+            case 1:
+                $method = 'product.setOffline';
+                break;
+            case 0:
+                $method='product.setOnline';
+                break;
+            default:
+                $method='product.setOffline';
+                break;
+        }
+        return $this->httpPost($method,
+            array_merge(compact('product_id'), $options)
+        );
+    }
 }

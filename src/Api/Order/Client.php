@@ -59,9 +59,9 @@ class Client extends BaseClient
      * @param string $order_id
      * @return void|array
      */
-    public function detail(string $order_id)
+    public function detail(string $order_id,string $access_token)
     {
-        return $this->httpPost('order.detail', ['order_id' => $order_id]);
+        return $this->httpPost('order.detail', compact('order_id','access_token'));
     }
 
     /**
@@ -73,9 +73,23 @@ class Client extends BaseClient
      * @return array
      * @throws \Xbhub\ShopDouyin\Api\Kernel\Exceptions\ClientError
      */
-    public function logisticsAdd($order_id,$logistics_id,$logistics_code,$company,$access_token)
+    public function logisticsAdd(string $order_id,string $logistics_id,string $logistics_code,string $company,string $access_token)
     {
         return $this->httpPost('order.logisticsAdd',compact('order_id','logistics_id','company','logistics_code'));
     }
 
+    /**
+     * 查询订单账单明细
+     * @param string $time_type
+     * @param string $start_time
+     * @param string $end_time
+     * @param $options
+     * @return array
+     * @throws \Xbhub\ShopDouyin\Api\Kernel\Exceptions\ClientError
+     */
+    public function settle(string $time_type,string $start_time,string $end_time,$options)
+    {
+        $_data = array_merge(compact('time_type','start_time','end_time'),$options);
+        return $this->httpPost('order.settle',$_data);
+    }
 }

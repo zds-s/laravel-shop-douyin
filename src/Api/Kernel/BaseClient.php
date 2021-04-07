@@ -160,7 +160,6 @@ class BaseClient
         $access_token = $params['access_token'];
         unset($common['access_token'],$common['sign_method'],$params['access_token']);
         ksort($params);
-//        dump($params);
         $param_json = json_encode((object)$params,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
         $common['param_json'] = $param_json;
         $str = 'app_key'.$credt['appkey'].'method'.$method.'param_json'.$param_json
@@ -174,7 +173,6 @@ class BaseClient
             'sign' => $sign
         ]);
         ksort($ret);
-//        dump($ret);
         return $ret;
     }
 
