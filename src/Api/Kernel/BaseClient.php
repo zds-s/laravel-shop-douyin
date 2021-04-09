@@ -40,7 +40,7 @@ class BaseClient
      *
      * @var array $commonParams 公共参数
      */
-    protected static array $commonParams = [];
+    protected array $commonParams = [];
 
     protected $ShopDouyinHandlerStack;
 
@@ -92,9 +92,9 @@ class BaseClient
      * 设置公共参数
      * @param array $commonParams
      */
-    public static function setCommonParams(array $commonParams)
+    public function setCommonParams(array $commonParams)
     {
-        self::$commonParams = $commonParams;
+        $this->commonParams = array_merge($this->commonParams,$commonParams);
     }
 
     /**
@@ -141,6 +141,27 @@ class BaseClient
     }
 
     /**
+     * 解译参数
+     * @param $args
+     * @return array
+     */
+    protected function _mergeBaseArgs($args)
+    {
+        $common = [];
+        $Closure = function ($args,$common,$Closure){
+            foreach ($args as $arg=>$argv)
+            {
+                if (is_string($arg)) {
+                    $common[$arg] = $argv;
+                    continue;
+                }
+                return $Closure($argv,$common,$Closure);
+            }
+            return $common;
+        };
+        return $Closure($args,$common,$Closure);
+    }
+    /**
      * 构造sign
      *
      * @param string $method
@@ -156,8 +177,8 @@ class BaseClient
             'v'          => '2',
             'method' => $method
         ];
-        $common = array_merge($public,$params,self::$commonParams);
-        $access_token = $params['access_token'];
+        $common = array_merge($public,$params,$this->commonParams);
+        $access_token = $common['access_token'];
         unset($common['access_token'],$common['sign_method'],$params['access_token']);
         ksort($params);
         $param_json = json_encode((object)$params,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
@@ -168,12 +189,12 @@ class BaseClient
         $sign = md5($md5_str);
         $public['sign_method'] = 'md5';
         $public['access_token']=$access_token;
-        $ret = array_merge($public, [
+        $_data = array_merge($public, [
             'param_json' => $param_json,
             'sign' => $sign
         ]);
-        ksort($ret);
-        return $ret;
+        ksort($_data);
+        return $_data;
     }
 
     /**

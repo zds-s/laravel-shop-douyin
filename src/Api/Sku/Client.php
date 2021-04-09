@@ -33,9 +33,9 @@ class Client extends BaseClient
     * @param string $settlement_price 结算价格 (单位 分)
     * @return void
     */
-    public function add(array $opstions)
+    public function add(...$options)
     {
-        return $this->httpPost('sku.add', $opstions);
+        return $this->httpPost('sku.add', $this->_mergeBaseArgs($options));
     }
 
     /**
@@ -58,29 +58,42 @@ class Client extends BaseClient
     /**
      * 获取sku列表
      *
-     * @param array $id product_id|out_product_id
-     * @return void
+     * @param string $product_id product_id|out_product_id
+     * @return array
      */
-    public function list(array $id)
+    public function list(string $product_id)
     {
-        return $this->httpPost('sku.list', $id);
+        return $this->httpPost('sku.list', compact('product_id'));
     }
 
 
     /**
      * 编辑sku价格
      *
-     * @param array $id product_id|out_product_id|out_sku_id|sku_id
+     * @param array $id sku_id
      * @param array $sku_id out_sku_id|sku_id
      * @param string $price
      * @return void
      */
-    public function editPrice(array $id, array $sku_id, string $price)
+    public function editPrice(string $id, string $sku_id, string $price,array $options=[])
     {
         return $this->httpPost('sku.editPrice', array_merge($id, [
             'price' => $price
         ]));
     }
+
+    /**
+     * 删除sku
+     * @param string $id
+     * @param array $options
+     * @return array
+     * @throws \Xbhub\ShopDouyin\Api\Kernel\Exceptions\ClientError
+     */
+    public function del(string $id,array $options=[])
+    {
+        return $this->httpPost('sku.del',array_merge(compact('id'),$options));
+    }
+
 
 
 }

@@ -92,4 +92,11 @@ class Client extends BaseClient
         $_data = array_merge(compact('time_type','start_time','end_time'),$options);
         return $this->httpPost('order.settle',$_data);
     }
+
+    public function logisticsCompanyList($access_token)
+    {
+        return $this->httpPost('order.'.__FUNCTION__,compact(
+            'access_token'
+        ));
+    }
 }

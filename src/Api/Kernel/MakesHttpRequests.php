@@ -26,6 +26,7 @@ trait MakesHttpRequests
      */
     protected $transform = true;
 
+    protected $Closure='';
 
     /**
      * @param string $method

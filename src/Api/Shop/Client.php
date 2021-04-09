@@ -24,9 +24,9 @@ class Client extends BaseClient
 
     /**
      * 获取商户所有授权品牌
-     *
-     * @param [type] $params
-     * @return void
+     * @param array $options
+     * @return array
+     * @throws \Xbhub\ShopDouyin\Api\Kernel\Exceptions\ClientError
      */
     public function brandList(array $options = [])
     {

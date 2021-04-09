@@ -26,7 +26,7 @@ class Client extends BaseClient
      * 获取规格列表
      *
      * @param [type] $params
-     * @return void
+     * @return array
      */
     public function list(array $options = [])
     {
@@ -39,7 +39,7 @@ class Client extends BaseClient
      * @param string $specs 颜色|黑色,白色,黄色^尺码|S,M,L
      * @param string $name 规格1
      * @param array $options
-     * @return void
+     * @return array
      */
     public function add(string $name, string $specs, array $options = [])
     {
@@ -53,7 +53,7 @@ class Client extends BaseClient
      * 规格详情
      *
      * @param string $id 134
-     * @return void
+     * @return array
      */
     public function specDetail(string $id)
     {
@@ -65,7 +65,7 @@ class Client extends BaseClient
      * 注意 : 删除spec后将导致原有绑定该spec的sku全部失效, 请慎重操作
      *
      * @param string $id
-     * @return void
+     * @return array
      */
     public function del(string $id)
     {
